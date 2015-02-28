@@ -23,6 +23,9 @@ module.exports = (robot) ->
   station = process.env.HUBOT_RAIN_STATION
   token = process.env.HUBOT_RAIN_WUNDERGROUND_TOKEN
 
+  lastPrecip = -1
+  currentlyRaining = false
+
   sendAnnouncement = (message) ->
     for room in roomsToAnnounceIn
       robot.messageRoom room, message
@@ -38,19 +41,19 @@ module.exports = (robot) ->
         precip = parseFloat(weatherData.current_observation.precip_1hr_in)
 
         rain = false
-        if weatherData.current_observation.weather.toLower().indexOf "rain" != -1
+        if condition.toLowerCase().indexOf("rain") != -1
           rain = true
-        else if precip > lastPrecip
+        else if lastPrecip != -1 and precip > lastPrecip
           rain = true
         if rain and not currentlyRaining
-          sendAnnouncement "Announcement: It's raining! (Condition: " + condition + ", Precip this hour: " + precip + ")"
+          sendAnnouncement "Announcement: It's raining! (Condition: " + condition + ", Precip this hour: " + precip + ", last: " + lastPrecip + ")"
         if not rain and currentlyRaining
           sendAnnouncement "Announcement: It has stopped raining."
         currentlyRaining = rain
         lastPrecip = precip
 
   setInterval ->
-    hour = (new Date).getHour()
+    hour = (new Date).getHours()
     if hour >= startHour and hour <= endHour
       checkForRain()
   , rainCheckFrequency * 60 * 1000

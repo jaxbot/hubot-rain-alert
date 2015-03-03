@@ -11,7 +11,7 @@
 #   HUBOT_RAIN_ANNOUNCE_ROOMS (Required) Which rooms to announce to, comma separated. On Slack, you'd use something like `general,weather` to announce in #general and #weather.
 #   HUBOT_RAIN_FREQUENCY (Optional, default 2) How frequently to check for updates, in minutes.
 #   HUBOT_RAIN_STARTHOUR (Optional, default 0) The beginning hour of when rain checks will be made, useful for limiting calls to between work hours and maximizing API calls per day.
-#   HUBOT_RAIN_STARTEND (Optional, default 24) The end hour of when rain checks will be made, useful for limiting calls to between work hours and maximizing API calls per day.
+#   HUBOT_RAIN_ENDHOUR (Optional, default 24) The end hour of when rain checks will be made, useful for limiting calls to between work hours and maximizing API calls per day.
 #
 # Commands:
 #   None

@@ -37,7 +37,7 @@ module.exports = (robot) ->
       robot.messageRoom(room, message)
 
   checkForRain = ->
-    http.get("http://api.wunderground.com/api/" + token + "/features/conditions/q/" + station + ".json", (res) ->
+    http.get("http://api.wunderground.com/api/" + token + "/conditions/q/" + station + ".json", (res) ->
       dataString = ""
       res.on 'data', (data) ->
         dataString += data.toString()
